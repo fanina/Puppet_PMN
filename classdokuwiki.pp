@@ -6,31 +6,31 @@ class dokuwiki {
         'php7.3':
             ensure => present
     }
-      file { 'download_dokuwiki':
+      file { 'dokuwiki::download_dokuwiki':
       ensure => present,
       path   => '/usr/src/dokuwiki.tgz',
       source => 'https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz'
     }
     exec {
-        'extract_dokuwiki':
+        'dokuwiki::extract_dokuwiki':
             command => 'tar xavf dokuwiki.tgz',
             cwd     => '/usr/src',
             path    => ['/usr/bin'],
-            require => File['download_dokuwiki'],
+            require => File['dokuwiki::download_dokuwiki'],
             before  => File['rename_dokuwiki'],
             unless  => 'test -d /usr/src/dokuwiki-2020-07-29/'
     }
-    file { 'rename_dokuwiki':
+    file { 'dokuwiki::rename_dokuwiki':
       ensure  => present,
       path    => '/usr/src/dokuwiki',
       source  => '/usr/src/dokuwiki-2020-07-29',
-      require => Exec['extract_dokuwiki'],
-      before  => File['delete_dokuwiki']
+      require => Exec['dokuwiki::extract_dokuwiki'],
+      before  => File['dokuwiki::delete_dokuwiki']
     }
-    file { 'delete_dokuwiki':
+    file { 'dokuwiki::delete_dokuwiki':
       ensure  => absent,
       path    => '/usr/src/dokuwiki-2020-07-29',
-      require => File['rename_dokuwiki']
+      require => File['dokuwiki::rename_dokuwiki']
     }
 } 
 
@@ -43,7 +43,7 @@ class politique {
     recurse => true,
     owner   => 'www-data',
     group   => 'www-data',
-    require => Class["dokuwiki::rename-dokuwiki"]
+    require => File['dokuwiki::rename-dokuwiki']
   }
 }
 
@@ -56,7 +56,7 @@ class recettes {
     recurse => true,
     owner   => 'www-data',
     group   => 'www-data',
-    require => Class["dokuwiki::rename-dokuwiki"]
+    require => File["dokuwiki::rename-dokuwiki"]
   }
 }
 
