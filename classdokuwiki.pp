@@ -32,7 +32,8 @@ class dokuwiki {
       path    => '/usr/src/dokuwiki-2020-07-29',
       require => File['dokuwiki::rename_dokuwiki']
     }
-    define install_site($siteName) {
+}
+    define deploy_site($siteName) {
         file {
           $siteName:
             ensure  => directory,
@@ -44,7 +45,7 @@ class dokuwiki {
             require => File['move-dokuwiki']
   }
 }
-} 
+
 
 class wiki { 
   file { "create new directory for ${env}.wiki in ${web_path} and allow apache to write in" :
@@ -61,11 +62,11 @@ class wiki {
 
 node 'server0' {
   include dokuwiki
-  install_site {
+  deploy_site {
     'politique.wiki':
       siteName => 'politique.wiki'
   }
-    install_site {
+    deploy_site {
     'recette.wiki':
       siteName => 'recettes.wiki'
   }
@@ -74,11 +75,11 @@ node 'server0' {
 
 node 'server1' {
   include dokuwiki
-  install_site {
+  deploy_site {
     'politique.wiki':
       siteName => 'politique.wiki'
   }
-    install_site {
+    deploy_site {
     'recette.wiki':
       siteName => 'recettes.wiki'
   }
