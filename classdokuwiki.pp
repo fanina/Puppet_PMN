@@ -34,7 +34,7 @@ class dokuwiki {
     }
 } 
 
-class wiki ($name) {
+class wiki {
   file { "$name" :
     ensure  => directory,
     source  => '/usr/src/dokuwiki',
