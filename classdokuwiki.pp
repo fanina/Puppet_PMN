@@ -43,7 +43,7 @@ class politique {
     recurse => true,
     owner   => 'www-data',
     group   => 'www-data',
-    require => [dokuwiki::File['rename-dokuwiki']]
+    require => Class["dokuwiki::rename-dokuwiki"]
   }
 }
 
@@ -56,7 +56,7 @@ class recettes {
     recurse => true,
     owner   => 'www-data',
     group   => 'www-data',
-    require => [dokuwiki::File['rename-dokuwiki']]
+    require => Class["dokuwiki::rename-dokuwiki"]
   }
 }
 
