@@ -34,7 +34,7 @@ class dokuwiki {
     }
 } 
 
-class wiki {
+class wiki { ($name)
   file { "$name" :
     ensure  => directory,
     source  => '/usr/src/dokuwiki',
@@ -47,13 +47,13 @@ class wiki {
 }
 
 
-node server0 {
-  $name ='recettes'
+node 'server0' {
+  $name = 'recettes'
   include dokuwiki
   include wiki
 }
 
-node server1 {
+node 'server1' {
   $name ='politique'
   include dokuwiki
   include wiki
