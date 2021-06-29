@@ -34,11 +34,12 @@ class dokuwiki {
     }
 } 
 
-class wiki ($path) {
-  file { $path :
+class wiki ($name) {
+  file { "$name" :
     ensure  => directory,
     source  => '/usr/src/dokuwiki',
     recurse => true,
+    path    => "/var/www/$name.wiki",
     owner   => 'www-data',
     group   => 'www-data',
     require => File['dokuwiki::rename_dokuwiki']
@@ -49,14 +50,14 @@ class wiki ($path) {
 node server0 {
   include dokuwiki
   class { wiki:
-      path    => '/var/www/recettes.wiki',
+      name    => 'recettes'
   }
 }
 
 node server1 {
   include dokuwiki
   class { wiki:
-      path    => '/var/www/politique.wiki'
-      path    => '/var/www/politiques.wiki'
+      name    => 'politique'
   }
+
 }
