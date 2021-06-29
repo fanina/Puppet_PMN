@@ -57,5 +57,6 @@ node server1 {
   include dokuwiki
   class { wiki:
       path    => '/var/www/politique.wiki'
+      path    => '/var/www/politiques.wiki'
   }
 }
