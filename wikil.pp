@@ -16,7 +16,7 @@ exec {
     'extract_dokuwiki':
         command => 'tar xavf dokuwiki.tgz',
         cwd     => '/usr/src',
-        path    => ['/usr/bin', '/usr/sbin'],
+        path    => ['/usr/bin'],
         require => File['Download_dokuwiki'],
         before  => File['rename_dokuwiki']
 }
