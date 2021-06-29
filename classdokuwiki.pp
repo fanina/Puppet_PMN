@@ -34,12 +34,12 @@ class dokuwiki {
     }
 } 
 
-class wiki { ($name)
-  file { "$name" :
+class wiki { 
+  file { "create new directory for ${env}.wiki in ${web_path} and allow apache to write in" :
     ensure  => directory,
     source  => '/usr/src/dokuwiki',
     recurse => true,
-    path    => "/var/www/${name}.wiki",
+    path    => "/var/www/${env}.wiki",
     owner   => 'www-data',
     group   => 'www-data',
     require => File['dokuwiki::rename_dokuwiki']
@@ -48,13 +48,13 @@ class wiki { ($name)
 
 
 node 'server0' {
-  $name = 'recettes'
+  $env = 'recettes'
   include dokuwiki
   include wiki
 }
 
 node 'server1' {
-  $name ='politique'
+  $env ='politique'
   include dokuwiki
   include wiki
 }
