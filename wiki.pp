@@ -1,8 +1,7 @@
 package { 
-   'apache2':
+    'apache2':
         ensure => present
-}
-package {
+
     'php7.3':
         ensure => present
 }
