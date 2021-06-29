@@ -7,7 +7,7 @@ package {
         ensure => present
 }
 file {
-    'Download_dokuwiki':
+    'download_dokuwiki':
         path   => '/usr/src/dokuwiki.tgz',
         ensure => present,
         source => 'https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz'
