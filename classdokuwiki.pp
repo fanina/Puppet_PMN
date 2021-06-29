@@ -47,7 +47,7 @@ class wiki ($path) {
 
 
 node server0 {
-  include politique
+  include dokuwiki
   class { wiki:
       path    => '/var/www/recettes.wiki',
   }
