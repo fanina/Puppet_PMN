@@ -42,7 +42,7 @@ class dokuwiki {
             recurse => true,
             owner   => 'www-data',
             group   => 'www-data',
-            require => File['move-dokuwiki']
+            require => File['dokuwiki::rename_dokuwiki']
   }
 }
 
