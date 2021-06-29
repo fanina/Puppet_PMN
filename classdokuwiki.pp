@@ -46,20 +46,6 @@ class dokuwiki {
   }
 }
 
-
-class wiki { 
-  file { "create new directory for ${env}.wiki in ${web_path} and allow apache to write in" :
-    ensure  => directory,
-    source  => '/usr/src/dokuwiki',
-    recurse => true,
-    path    => "/var/www/${env}.wiki",
-    owner   => 'www-data',
-    group   => 'www-data',
-    require => File['dokuwiki::rename_dokuwiki']
-  }
-}
-
-
 node 'server0' {
   include dokuwiki
   deploy_site {
