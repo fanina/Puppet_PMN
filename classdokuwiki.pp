@@ -32,26 +32,6 @@ class dokuwiki {
       path    => '/usr/src/dokuwiki-2020-07-29',
       require => File['rename_dokuwiki']
     }
-
-    file { 'create recettes.wiki directory':
-      ensure  => directory,
-      path    => '/var/www/recettes.wiki',
-      source  => '/usr/src/dokuwiki',
-      recurse => true,
-      owner   => 'www-data',
-      group   => 'www-data',
-      require => File['rename_dokuwiki']
-    }
-    file { 'create politique.wiki directory':
-      ensure  => directory,
-      path    => '/var/www/politique.wiki',
-      source  => '/usr/src/dokuwiki',
-      recurse => true,
-      owner   => 'www-data',
-      group   => 'www-data',
-      require => File['rename_dokuwiki']
-    }
-
 } 
 
 node 'server0' {
