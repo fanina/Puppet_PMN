@@ -17,14 +17,17 @@ exec {
         command => 'tar xavf dokuwiki.tgz',
         cwd     => '/usr/src',
         path    => ['/usr/bin', '/usr/sbin'],
-        require => File['Download_dokuwiki']
+        require => File['Download_dokuwiki'],
+        before  => File['rename_dokuwiki']
 }
 file {
     'rename_dokuwiki':
-        path => '/usr/src/dokuwiki',
-        ensure => present,
-        source => '/usr/src/dokuwiki-2020-07-29',
-        require => Exec['extract_dokuwiki']
+        path    => '/usr/src/dokuwiki',
+        ensure  => present,
+        source  => '/usr/src/dokuwiki-2020-07-29',
+        require => Exec['extract_dokuwiki'],
+        before  => File['delete_dokuwiki']
+
 }
 file {
     'delete_dokuwiki':
