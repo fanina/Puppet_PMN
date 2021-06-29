@@ -70,6 +70,11 @@ node 'server0' {
     'recette.wiki':
       siteName => 'recettes.wiki'
   }
+     deploy_site {
+    'Tajineworld.wiki':
+      siteName => 'Tajineworld.wiki'
+  }
+
 
 }
 
