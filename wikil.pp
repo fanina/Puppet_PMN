@@ -31,8 +31,8 @@ file {
 }
 file {
     'delete_dokuwiki':
-        path => '/usr/src/dokuwiki-2020-07-29',
-        ensure => absent,
+        path    => '/usr/src/dokuwiki-2020-07-29',
+        ensure  => absent,
         require => File['rename_dokuwiki']
 }
 
