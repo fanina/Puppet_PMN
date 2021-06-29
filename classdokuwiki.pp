@@ -17,7 +17,7 @@ class dokuwiki {
             cwd     => '/usr/src',
             path    => ['/usr/bin'],
             require => File['dokuwiki::download_dokuwiki'],
-            before  => File['rename_dokuwiki'],
+            before  => File['dokuwiki::rename_dokuwiki'],
             unless  => 'test -d /usr/src/dokuwiki-2020-07-29/'
     }
     file { 'dokuwiki::rename_dokuwiki':
