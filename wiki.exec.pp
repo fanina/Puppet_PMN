@@ -11,9 +11,10 @@ exec {
         path => ['/usr/bin', '/usr/sbin']
 }
 exec {
-    'tar xavf dokuwiki.tgz':
-        cwd => '/usr/src',
-        path => ['/usr/bin', '/usr/sbin']
+    'extract_dokuwiki':
+        command => 'tar xavf dokuwiki.tgz',
+        cwd     => '/usr/src',
+        path    => ['/usr/bin', '/usr/sbin']
 }
 exec {
     'mv dokuwiki-2020-07-29 dokuwiki':

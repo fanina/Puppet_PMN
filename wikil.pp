@@ -7,23 +7,30 @@ package {
         ensure => present
 }
 file {
-    '/usr/src/dokuwiki.tgz':
+    'Download_dokuwiki':
+        path   => '/usr/src/dokuwiki.tgz',
         ensure => present,
         source => 'https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz'
 }
 exec {
-    'tar xavf dokuwiki.tgz':
-        cwd => '/usr/src',
-        path => ['/usr/bin', '/usr/sbin']
+    'extract_dokuwiki':
+        command => 'tar xavf dokuwiki.tgz',
+        cwd     => '/usr/src',
+        path    => ['/usr/bin', '/usr/sbin'],
+        require => File['Download_dokuwiki']
 }
 file {
-    '/usr/src/dokuwiki':
+    'rename_dokuwiki':
+        path => '/usr/src/dokuwiki',
         ensure => present,
-        source => '/usr/src/dokuwiki-2020-07-29'
+        source => '/usr/src/dokuwiki-2020-07-29',
+        require => Exec['extract_dokuwiki']
 }
 file {
-    '/usr/src/dokuwiki-2020-07-29':
-        ensure => absent
+    'delete_dokuwiki':
+        path => '/usr/src/dokuwiki-2020-07-29',
+        ensure => absent,
+        require => File['rename_dokuwiki']
 }
 
 file {
@@ -33,7 +40,8 @@ file {
         source  => '/usr/src/dokuwiki',
         recurse => true,
         owner   => 'www-data',
-        group   => 'www-data'
+        group   => 'www-data',
+        require => File['rename_dokuwiki']
 }
 file {
     'create politique.wiki directory':
@@ -42,5 +50,6 @@ file {
         source  => '/usr/src/dokuwiki',
         recurse => true,
         owner   => 'www-data',
-        group   => 'www-data'
+        group   => 'www-data',
+        require => File['rename_dokuwiki']
 }
