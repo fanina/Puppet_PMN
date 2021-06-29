@@ -34,6 +34,38 @@ class dokuwiki {
     }
 } 
 
-node 'server0' {
-    include dokuwiki
+class politique {
+  file {
+  'copy-dokuwiki-recettes.wiki':
+    ensure  => directory,
+    path    => '/var/www/recettes.wiki',
+    source  => '/usr/src/dokuwiki',
+    recurse => true,
+    owner   => 'www-data',
+    group   => 'www-data',
+    require => File['move-dokuwiki']
+  }
+}
+
+class recettes {
+  file {
+  'create directory for politique.wiki':
+    ensure  => directory,
+    path    => '/var/www/politique.wiki',
+    source  => '/usr/src/dokuwiki',
+    recurse => true,
+    owner   => 'www-data',
+    group   => 'www-data',
+    require => File['move-dokuwiki']
+  }
+}
+
+node server0 {
+  include dokuwiki
+  include politiquewiki
+}
+
+node server1 {
+  include dokuwiki
+  include recetteswiki
 }
