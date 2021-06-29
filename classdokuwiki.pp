@@ -34,11 +34,10 @@ class dokuwiki {
     }
 } 
 
-class politique {
+class wiki { $path :
   file {
   'copy-dokuwiki-recettes.wiki':
     ensure  => directory,
-    path    => '/var/www/recettes.wiki',
     source  => '/usr/src/dokuwiki',
     recurse => true,
     owner   => 'www-data',
@@ -47,25 +46,17 @@ class politique {
   }
 }
 
-class recettes {
-  file {
-  'create directory for politique.wiki':
-    ensure  => directory,
-    path    => '/var/www/politique.wiki',
-    source  => '/usr/src/dokuwiki',
-    recurse => true,
-    owner   => 'www-data',
-    group   => 'www-data',
-    require => File["dokuwiki::rename_dokuwiki"]
-  }
-}
 
 node server0 {
-  include dokuwiki
   include politique
+  class { wiki:
+      path    => '/var/www/recettes.wiki',
+  }
 }
 
 node server1 {
   include dokuwiki
-  include recettes
+  class { wiki:
+      path    => '/var/www/politique.wiki'
+  }
 }
