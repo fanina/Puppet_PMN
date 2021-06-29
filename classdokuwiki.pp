@@ -35,5 +35,5 @@ class dokuwiki {
 } 
 
 node 'server0' {
-    includ dokuwiki
+    include dokuwiki
 }
