@@ -38,10 +38,10 @@ class dokuwiki {
           $siteName:
             ensure  => directory,
             path    => "/var/www/${siteName}",
-            source  => $source,
+            source  => '/usr/src/dokuwiki',
             recurse => true,
-            owner   => $owner,
-            group   => $owner,
+            owner   => 'www-data',
+            group   => 'www-data',
             require => File['move-dokuwiki']
   }
 }
