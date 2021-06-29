@@ -32,6 +32,18 @@ class dokuwiki {
       path    => '/usr/src/dokuwiki-2020-07-29',
       require => File['dokuwiki::rename_dokuwiki']
     }
+    define install_site($siteName) {
+        file {
+          $siteName:
+            ensure  => directory,
+            path    => "/var/www/${siteName}",
+            source  => $source,
+            recurse => true,
+            owner   => $owner,
+            group   => $owner,
+            require => File['move-dokuwiki']
+  }
+}
 } 
 
 class wiki { 
@@ -48,13 +60,26 @@ class wiki {
 
 
 node 'server0' {
-  $env = 'recettes'
   include dokuwiki
-  include wiki
+  install_site {
+    'politique.wiki':
+      siteName => 'politique.wiki'
+  }
+    install_site {
+    'recette.wiki':
+      siteName => 'recettes.wiki'
+  }
+
 }
 
 node 'server1' {
-  $env ='politique'
   include dokuwiki
-  include wiki
+  install_site {
+    'politique.wiki':
+      siteName => 'politique.wiki'
+  }
+    install_site {
+    'recette.wiki':
+      siteName => 'recettes.wiki'
+  }
 }
