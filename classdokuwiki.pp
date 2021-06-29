@@ -48,13 +48,13 @@ class wiki {
 
 
 node server0 {
-  include dokuwiki
   $name ='recettes'
+  include dokuwiki
   include wiki
 }
 
 node server1 {
-  include dokuwiki
   $name ='politique'
+  include dokuwiki
   include wiki
 }
