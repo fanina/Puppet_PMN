@@ -17,7 +17,7 @@ exec {
         path    => ['/usr/bin'],
         require => File['download_dokuwiki'],
         before  => File['rename_dokuwiki'],
-	unless  => 'test -d /usr/src/dokuwiki-2020-07-29/'
+	    unless  => 'test -d /usr/src/dokuwiki-2020-07-29/'
 }
 file { 'rename_dokuwiki':
   ensure  => present,
