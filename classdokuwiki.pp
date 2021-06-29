@@ -36,7 +36,6 @@ class dokuwiki {
 
 class wiki ($path) {
   file { $path :
-  'copy-dokuwiki-recettes.wiki':
     ensure  => directory,
     source  => '/usr/src/dokuwiki',
     recurse => true,
