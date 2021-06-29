@@ -39,7 +39,7 @@ class wiki {
     ensure  => directory,
     source  => '/usr/src/dokuwiki',
     recurse => true,
-    path    => "/var/www/$name.wiki",
+    path    => "/var/www/{$name}.wiki",
     owner   => 'www-data',
     group   => 'www-data',
     require => File['dokuwiki::rename_dokuwiki']
