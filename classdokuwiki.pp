@@ -44,6 +44,11 @@ class dokuwiki {
             group   => 'www-data',
             require => File['dokuwiki::rename_dokuwiki']
   }
+      file { "template $siteName":
+      ensure  => file,
+      path    => "/etc/apache2/sites-enabled/${siteName}.conf",
+      content => template("/vagrant/tp/Puppet_PMN/apache.conf.erb")
+  }
 }
 
 node 'server0' {
