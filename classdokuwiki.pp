@@ -33,20 +33,20 @@ class dokuwiki {
       require => File['dokuwiki::rename_dokuwiki']
     }
 }
-    define deploy_site($siteName) {
+    define deploy_site($site_name) {
         file {
-          $siteName:
+          $site_name:
             ensure  => directory,
-            path    => "/var/www/${siteName}",
+            path    => "/var/www/${site_name}",
             source  => '/usr/src/dokuwiki',
             recurse => true,
             owner   => 'www-data',
             group   => 'www-data',
             require => File['dokuwiki::rename_dokuwiki']
   }
-      file { "template $siteName":
+      file { "template $site_name":
       ensure  => file,
-      path    => "/etc/apache2/sites-enabled/${siteName}.conf",
+      path    => "/etc/apache2/sites-enabled/${site_name}.conf",
       content => template("/vagrant/tp/Puppet_PMN/apache.conf.erb")
   }
 }
@@ -55,15 +55,15 @@ node 'server0' {
   include dokuwiki
   deploy_site {
     'politique.wiki':
-      siteName => 'politique.wiki'
+      site_name => 'politique.wiki'
   }
     deploy_site {
     'recette.wiki':
-      siteName => 'recettes.wiki'
+      site_name => 'recettes.wiki'
   }
      deploy_site {
-    'Tajineworld.wiki':
-      siteName => 'Tajineworld.wiki'
+    'tajineworld.wiki':
+      site_name => 'tajineworld.wiki'
   }
 
 
@@ -73,10 +73,10 @@ node 'server1' {
   include dokuwiki
   deploy_site {
     'politique.wiki':
-      siteName => 'politique.wiki'
+      site_name => 'politique.wiki'
   }
     deploy_site {
     'recette.wiki':
-      siteName => 'recettes.wiki'
+      site_name => 'recettes.wiki'
   }
 }
