@@ -47,7 +47,7 @@ class dokuwiki {
       file { "template $site_name":
       ensure  => file,
       path    => "/etc/apache2/sites-enabled/${site_name}.conf",
-      content => template("/vagrant/tp/Puppet_PMN/apache.conf.erb")
+      content => template("/home/vagrant/tp/Puppet_PMN/default-apache.conf.erb")
   }
 }
 
